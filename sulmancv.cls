@@ -2,19 +2,16 @@
 %%% Affil: University of Nairobi
 %%% Note: This class file is copyrighted. All rights reserved.
 
-% ============================ sulmancv.cls ============================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{sulmancv}[2025/08/31 v1.1 Sulman CV class]
+\ProvidesClass{sulmancv}[2025/09/30 v1.2 Sulman CV class]
 
-% ---- Forward unknown options to article (e.g., 10pt, 11pt, letterpaper)
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 \LoadClass{article}
 
-% ================== REQUIRED PACKAGES (portable defaults) ==================
+% =========== REQUIRED PACKAGES  ==================
 \RequirePackage[T1]{fontenc}
 % \RequirePackage{epigrafica} % uncomment ONLY if installed
-%\RequirePackage{datetime}
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
 \RequirePackage{array}
@@ -29,7 +26,7 @@
 \RequirePackage[many]{tcolorbox}
 \RequirePackage[explicit]{titlesec}
 \RequirePackage{fontawesome5}
-\RequirePackage{eso-pic}       % (no pscoord needed with our new placement)
+\RequirePackage{eso-pic}       
 \RequirePackage{forest}
 \RequirePackage{tikz}
 \RequirePackage{hyperref}
@@ -37,7 +34,7 @@
 \RequirePackage{geometry}
 \RequirePackage{textcomp}
 
-% ================== PAGE GEOMETRY (matches your template) ==================
+% ================== PAGE GEOMETRY ==================
 \geometry{
   ignoreheadfoot,
   top=1.5cm,
@@ -45,7 +42,7 @@
   left=1.5cm,
   right=1.5cm,
   footskip=0.8cm
-  % ,showframe % <- uncomment for debugging
+% ,showframe % <- uncomment ONLY for debugging
 }
 
 % ================== COLOURS ==================
@@ -59,14 +56,14 @@
 \definecolor{cvMuted}{HTML}{9CA3AF}
 \definecolor{primaryColor2}{HTML}{C0C0C0}
 
-% ================== GLOBAL SPACING/TWEAKS ==================
+% ================== GLOBAL SPACING TWEAKS ==================
 \AtBeginDocument{\pdfgentounicode=1}
 \raggedbottom
 \setcounter{secnumdepth}{0}
 \setlength{\parindent}{0pt}
 \setlength{\topskip}{0pt}
 \setlength{\parskip}{0.1cm plus4mm minus3mm}
-\pagestyle{empty} % body pages have custom footer set below
+\pagestyle{empty} 
 
 % ================== SECTION STYLE ==================
 \titleformat{\section}{\Large\color{primaryColor}}{}{0pt}{%
@@ -79,7 +76,6 @@
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
 \newcolumntype{K}[1]{>{\let\newline\\\arraybackslash\hspace{0pt}}X}
 \setlength\tabcolsep{-1.5pt}
-% centre every tabularx (as in your template)
 \let\sulmancv@origTX\tabularx
 \let\sulmancv@origEndTX\endtabularx
 \renewenvironment{tabularx}{\bgroup\centering\sulmancv@origTX}{\sulmancv@origEndTX\par\egroup}
@@ -168,25 +164,22 @@
 
 \pagestyle{customFooterStyle}
 
-% ================== "LAST UPDATED" STAMP (safe inside margins) ==================
+% ================== "LAST UPDATED" STAMP  ==================
 \makeatletter
 \newcommand{\placelastupdatedtext}{%
   \AddToShipoutPictureFG*{%
     % Anchor at the top-right corner of the TEXT AREA (not paper edge):
     \put(%
-      \LenToUnit{\dimexpr\paperwidth-\Gm@rmargin-0.2cm\relax},% x: inside right margin with 0.2cm padding
-      \LenToUnit{\dimexpr\paperheight-\Gm@tmargin-0.2cm\relax}% y: 0.2cm below top text boundary
+      \LenToUnit{\dimexpr\paperwidth-\Gm@rmargin-0.1cm\relax},% x: inside right margin with 0.2cm padding
+      \LenToUnit{\dimexpr\paperheight-\Gm@tmargin--0.5cm\relax}% y: 0.2cm below top text boundary
     ){%
-      \makebox[0pt][r]{\small\color{gray}\itshape Last updated on \today}%
+      \makebox[0pt][r]{\small\color{gray}\itshape \textcolor{black}{\faInfoCircle}\;Last updated on \today}%
     }%
   }%
 }
 \makeatother
 
 % ================== HYPERREF SETUP ==================
-\RequirePackage{hyperref}
-
-% Global defaults for all docs using this class
 \hypersetup{
   pdftitle={Sulman Olieko Owili CV},
   pdfauthor={Sulman Olieko Owili},
@@ -250,7 +243,7 @@
   \endgroup
 }
 
-% Numeric accessors (useful in tables)
+% Numeric accessors 
 \newcommand{\DurYearsNum}[6]{%
   \begingroup \Dur@compute{#1}{#2}{#3}{#4}{#5}{#6}\number\Dur@YY\endgroup
 }
@@ -258,7 +251,7 @@
   \begingroup \Dur@compute{#1}{#2}{#3}{#4}{#5}{#6}\number\Dur@MM\endgroup
 }
 
-% Convenience: start date to "today"
+% Start date to "today"
 \newcommand{\DurToTodayYMD}[3]{%
   \DurYMD{#1}{#2}{#3}{\the\year}{\the\month}{\the\day}%
 }
